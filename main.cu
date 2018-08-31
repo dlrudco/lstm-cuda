@@ -14,7 +14,7 @@
 #include <sstream>
 #include <fstream>
 #include <string.h>
-#include <sys/time.h>
+//#include <sys/time.h>
 #include <stdlib.h>
 #include <math.h>
 using namespace std;
@@ -37,7 +37,8 @@ int main(int argc, char *argv[]) {
 		cout << argv[0] << " <learning rate> <decay rate> <blocks> <cells> <size ...>" << endl;
 		return -1;
 	}
-
+	int t =0;
+	printf("%d\n",t++);
 	int updatePoints = 10;
 	int savePoints = 10;
 	int maxEpoch = 10;
@@ -52,7 +53,7 @@ int main(int argc, char *argv[]) {
 
 	const int _day = getDate()->tm_mday;
 
-
+printf("%d\n",t++);
 	/**
 	 *
 	 * 	Open file streams to save data samples from Neural Network
@@ -60,24 +61,25 @@ int main(int argc, char *argv[]) {
 	 *
 	 */
 	ostringstream errorDataFileName;
-	errorDataFileName << "/u/trabucco/Desktop/Temporal_Convergence_Data_Files/" <<
+printf("%d\n",t++);
+	errorDataFileName << "/home/lkc/Desktop/Temporal_Convergence_Data_Files/" <<
 			(getDate()->tm_year + 1900) << "-" << (getDate()->tm_mon + 1) << "-" << _day <<
 			"_Multicore-LSTM-Error_" << learningRate <<
 			"-learning_" << decayRate << "-decay.csv";
 	ofstream errorData(errorDataFileName.str(), ios::app);
 	if (!errorData.is_open()) return -1;
 
-
+	printf("%d\n",t++);
 	ostringstream accuracyDataFileName;
-	accuracyDataFileName << "/u/trabucco/Desktop/Temporal_Convergence_Data_Files/" <<
+	accuracyDataFileName << "/home/lkc/Desktop/Temporal_Convergence_Data_Files/" <<
 			(getDate()->tm_year + 1900) << "-" << (getDate()->tm_mon + 1) << "-" << _day <<
 			"_GPU-LSTM-Accuracy_" << learningRate <<
 			"-learning_" << decayRate << "-decay.csv";
 	ofstream accuracyData(accuracyDataFileName.str(), ios::app);
 	if (!accuracyData.is_open()) return -1;
-
+	printf("%d\n",t++);
 	ostringstream timingDataFileName;
-	timingDataFileName << "/u/trabucco/Desktop/Sequential_Convergence_Data_Files/" <<
+	timingDataFileName << "/home/lkc/Desktop/Sequential_Convergence_Data_Files/" <<
 			(getDate()->tm_year + 1900) << "-" << (getDate()->tm_mon + 1) << "-" << _day <<
 			"_GPU-LSTM-Timing_" << learningRate <<
 			"-learning_" << decayRate << "-decay.csv";
@@ -85,7 +87,7 @@ int main(int argc, char *argv[]) {
 	if (!timingData.is_open()) return -1;
 
 	ostringstream outputDataFileName;
-	outputDataFileName << "/u/trabucco/Desktop/Sequential_Convergence_Data_Files/" <<
+	outputDataFileName << "/home/lkc/Desktop/Sequential_Convergence_Data_Files/" <<
 			(getDate()->tm_year + 1900) << "-" << (getDate()->tm_mon + 1) << "-" << _day <<
 			"_GPU-LSTM-Output_" << learningRate <<
 			"-learning_" << decayRate << "-decay.csv";
@@ -101,6 +103,7 @@ int main(int argc, char *argv[]) {
 
 
 	LSTMNetwork network = LSTMNetwork(dataset.getCharSize(), blocks, cells, learningRate, decayRate);
+	
 	OutputTarget target = OutputTarget(dataset.getCharSize(), dataset.getCharSize());
 	cout << "Network initialized" << endl;
 

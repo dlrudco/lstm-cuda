@@ -9,7 +9,7 @@
 
 DatasetAdapter::DatasetAdapter() {
 	// TODO Auto-generated constructor stub
-	ifstream trainingDatasetFile("/stash/tlab/datasets/Language/nietzsche.txt");
+	ifstream trainingDatasetFile("./nietzsche.txt");
 	charIndex = -1;
 
 	if (trainingDatasetFile.is_open()) {
